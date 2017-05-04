@@ -11,9 +11,14 @@ import { DashboardComponent } from './dashboard.component';
 import {
     TimelineComponent,
     NotificationComponent,
-    ChatComponent
+    ChatComponent,
+    RequestListComponent
 } from './components';
 import { StatModule } from '../../shared';
+import { DashboardService } from './dashboard.service';
+
+import { LanguageService } from '../../shared/services/language.service';
+
 
 @NgModule({
     imports: [
@@ -27,7 +32,9 @@ import { StatModule } from '../../shared';
         DashboardComponent,
         TimelineComponent,
         NotificationComponent,
-        ChatComponent
-    ]
+        ChatComponent,
+        RequestListComponent
+    ],
+    providers: [ DashboardService, LanguageService ]
 })
 export class DashboardModule { }

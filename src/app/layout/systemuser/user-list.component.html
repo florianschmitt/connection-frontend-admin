@@ -1,0 +1,43 @@
+<app-page-header [heading]="'Team'" [icon]="'fa-address-card'"></app-page-header>
+
+<div class="card-block table-responsive">
+
+    <button class="btn btn-primary" [routerLink]="['/users/new']"><i class="fa fa-fw fa-plus-circle"></i>&nbsp;Neues Teammitglied</button>
+
+    <table class="mt-2 table">
+        <thead>
+            <tr>
+                <th>Vorname</th>
+                <th>Nachname</th>
+                <th>E-Mail</th>
+                <th>Status</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody *ngIf="users; else loading; let vs">
+            <tr *ngFor="let v of vs; let rowIndex = index">
+                <td>{{v.firstname}}</td>
+                <td>{{v.lastname}}</td>
+                <td><a href="mailto:{{v.email}}">{{v.email}}</a></td>
+                <td>{{v.isActive == true ? "Aktiv" : "Inaktiv"}}</td>
+                <td><button class="btn btn-outline-primary" [routerLink]="['/users/edit/', v.id]"><i class="fa fa-fw fa-pencil-square-o"></i>&nbsp;Bearbeiten</button></td>
+                <td>
+                  <button
+                    class="btn btn-outline-danger"
+                    mwlConfirmationPopover
+                    title="Löschen"
+                    message="Möchten sie diesen Eintrag wirklich löschen?"
+                    confirmText="Löschen"
+                    cancelText="Abbrechen"
+                    placement="top"
+                    (confirm)="delete(v.id, rowIndex)">
+                    <i class="fa fa-fw fa-remove"></i>&nbsp;Löschen
+                  </button>
+                </td>
+            </tr>
+          <ng-template #loading><div class="loader"></div></ng-template>
+        </tbody>
+    </table>
+
+</div>

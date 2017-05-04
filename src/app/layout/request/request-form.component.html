@@ -1,0 +1,102 @@
+<app-page-header [heading]="'Vorgang'" [icon]="'fa-address-card'"></app-page-header>
+
+
+<div class="container" *ngIf="model">
+
+    <div class="row">
+        <div class="col-sm-6 pt-2">
+            <div class="card">
+                <div class="card-header">Vorgang</div>
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-4">Nummer</div>
+                        <div class="col-8"><b>{{ model.requestIdentifier }}</b></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">Status</div>
+                        <div class="col-8">{{ model.state }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">Sprache(n)</div>
+                        <div class="col-8">{{ languages(model) }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">Datum</div>
+                        <div class="col-8">{{ timestring(this.model) }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">Erstellungsdatum</div>
+                        <div class="col-8">{{ timestringCreate(this.model) }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">Anlass</div>
+                        <div class="col-8">{{ model.ocation }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">E-Mail</div>
+                        <div class="col-8"><a href="mailto:{{ model.email }}">{{ model.email }}</a></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">Telefonnummer</div>
+                        <div class="col-8">{{ model.phone }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">Straße</div>
+                        <div class="col-8">{{ model.street }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">PLZ</div>
+                        <div class="col-8">{{ model.postalCode }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">Stadt</div>
+                        <div class="col-8">{{ model.city }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">Übernommen von</div>
+                        <div class="col-8"><b>{{ model.acceptedByVolunteer }}</b></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 pt-2">
+          <div class="card">
+            <div class="card-header">Vorgangsanfragen</div>
+            <div class="card-block table-responsive">
+              <voucher-list-single [requestId]="model.requestIdentifier"></voucher-list-single>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 pt-2">
+          <div class="card">
+            <div class="card-header">Aufwandsentschädigungen</div>
+            <div class="card-block table-responsive">
+              <payment-list-single [requestId]="model.requestIdentifier"></payment-list-single>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 pt-2">
+            <div class="mt-2 card">
+                <div class="card-header">Aufwandsentschädigung buchen</div>
+                <div class="card-block form-group">
+                    <label for="paymentAmount" class="col-form-label">Betrag</label>
+                    <div class="col-xl-12">
+                        <input required type="number" ng-maxlength="1000" class="form-control" name="paymentAmount" id="paymentAmount" [(ngModel)]="paymentAmount">
+                    </div>
+
+                    <label for="paymentComment" class="col-form-label">Kommentar</label>
+                    <div class="col-xl-12">
+                        <input class="form-control" name="paymentComment" id="paymentComment" [(ngModel)]="paymentComment">
+                    </div>
+
+                    <button [disabled]='canNotPlacePayment()' class="btn btn-success mt-1" (click)='placePayment()'>Buchen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a class="btn btn-link" [routerLink]="['/dashboard']">Zurück</a>
+</div>

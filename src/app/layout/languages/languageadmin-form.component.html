@@ -1,0 +1,40 @@
+<app-page-header [heading]="'Sprachen'" [icon]="'fa-language'"></app-page-header>
+
+<div class="container">
+
+      <div *ngIf="msg">
+        {{msg}}
+      </div>
+
+        <form (ngSubmit)="onSubmit()" #heroForm="ngForm" *ngIf="model">
+
+          <div class="form-group row">
+            <label for="identifier" class="col-sm-2 col-form-label">Identifierung</label>
+            <div class="col-sm-6">
+              <input required class="form-control" name="identifier" id="identifier" [(ngModel)]="model.identifier">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="viewOrder" class="col-sm-2 col-form-label">Ordnung</label>
+            <div class="col-sm-6">
+              <input required class="form-control" name="viewOrder" id="viewOrder" [(ngModel)]="model.viewOrder">
+            </div>
+          </div>
+
+          <ul class="form-group row" *ngFor="let loc of localized(); let i = index;">
+              <label for="lang" class="col-sm-2 col-form-label">Übersetzung</label>
+              <div class="col-sm-4">
+                <input readonly class="form-control" name="lang-{{i}}" id="lang" [value]="getTranslated(loc.locale)">
+              </div>
+
+              <label for="value" class="col-sm-2 col-form-label">Wert</label>
+              <div class="col-sm-4">
+                <input required class="form-control" name="value-{{i}}" id="value" [(ngModel)]="loc.value">
+              </div>
+          </ul>
+
+           <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Speichern</button>
+           <a class="btn" [routerLink]="['/language/list']">Zurück</a>
+          </form>
+        </div>

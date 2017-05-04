@@ -1,0 +1,43 @@
+<app-page-header [heading]="'Freiwillige'" [icon]="'fa-users'"></app-page-header>
+
+<div class="card-block table-responsive">
+
+    <button class="btn btn-primary" [routerLink]="['/volunteers/new']"><i class="fa fa-fw fa-plus-circle"></i>&nbsp;Neue(r) Freiwillige(r)</button>
+
+    <table class="mt-2 table">
+        <thead>
+            <tr>
+                <th>Vorname</th>
+                <th>Nachname</th>
+                <th>E-Mail</th>
+                <th>Sprachen</th>
+                <th>Status</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody *ngIf="volunteers; else loading; let vs">
+            <tr *ngFor="let v of vs">
+                <td>{{v.firstname}}</td>
+                <td>{{v.lastname}}</td>
+                <td><a href="mailto:{{v.email}}">{{v.email}}</a></td>
+                <td>{{volunteerLanguages(v)}}</td>
+                <td>{{v.active == true ? "Aktiv" : "Inaktiv"}}</td>
+                <td><button class="btn btn-outline-primary" [routerLink]="['/volunteers/edit/', v.id]"><i class="fa fa-fw fa-pencil-square-o"></i>&nbsp;Bearbeiten</button></td>
+                <td>
+                  <button
+                    class="btn btn-outline-danger"
+                    mwlConfirmationPopover
+                    title="Löschen"
+                    message="Möchten sie diesen Eintrag wirklich löschen?"
+                    confirmText="Löschen"
+                    cancelText="Abbrechen"
+                    placement="top"
+                    (confirm)="delete(v.id, rowIndex)">
+                    <i class="fa fa-fw fa-remove"></i>&nbsp;Löschen
+                  </button>
+            </tr>
+          <ng-template #loading><div class="loader"></div></ng-template>
+        </tbody>
+    </table>
+</div>

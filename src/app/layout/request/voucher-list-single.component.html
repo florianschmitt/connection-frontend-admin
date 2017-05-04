@@ -1,0 +1,17 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Freiwilliger</th>
+            <th>Antwort</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="o | async; let vs">
+        <tr *ngFor="let v of vs">
+            <td>{{v.identifier}}</td>
+            <td>{{v.volunteerString}}</td>
+            <td>{{answerToString(v)}}</td>
+        </tr>
+      <ng-template #loading><div class="loader"></div></ng-template>
+    </tbody>
+</table>

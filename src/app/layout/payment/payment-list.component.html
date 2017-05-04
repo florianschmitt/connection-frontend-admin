@@ -1,0 +1,26 @@
+<app-page-header [heading]="'Aufwandsentschädigung'" [icon]="'fa-money'"></app-page-header>
+
+<div class="card-block table-responsive">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nummer</th>
+                <th>Betrag</th>
+                <th>Gebucht von</th>
+                <th>Zeitpunkt</th>
+                <th>Kommentar</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="o | async; let vs">
+            <tr *ngFor="let v of vs">
+                <td>{{v.requestId}}</td>
+                <td>{{v.paymentReceived}}</td>
+                <td>{{v.paymentBookedBy}}</td>
+                <td>{{timestring(v)}}</td>
+                <td>{{v.comment}}</td>
+            </tr>
+          <ng-template #loading><div class="loader"></div></ng-template>
+        </tbody>
+    </table>
+</div>

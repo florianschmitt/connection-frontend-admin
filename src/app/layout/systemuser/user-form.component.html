@@ -1,0 +1,63 @@
+<app-page-header [heading]="'Team'" [icon]="'fa-address-card'"></app-page-header>
+
+<div class="container">
+
+    <div *ngIf="msg">
+        {{msg}}
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #heroForm="ngForm" *ngIf="model">
+
+        <div class="form-group row">
+            <label for="firstname" class="col-sm-2 col-form-label">Vorname</label>
+            <div class="col-sm-6">
+                <input required class="form-control" name="firstname" id="firstname" [(ngModel)]="model.firstname">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="lastname" class="col-sm-2 col-form-label">Nachname</label>
+            <div class="col-sm-6">
+                <input required class="form-control" name="lastname" id="lastname" [(ngModel)]="model.lastname">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="email" class="col-sm-2 col-form-label">E-Mail</label>
+            <div class="col-sm-6">
+                <input required class="form-control" name="email" id="email" [(ngModel)]="model.email" type="email">
+            </div>
+        </div>
+
+        <div class="form-check">
+            <label class="form-check-label">
+               <input type="checkbox" class="form-check-input" name="isActive" id="isActive" [(ngModel)]="model.isActive">
+               Aktiv
+             </label>
+        </div>
+
+        <div class="form-check">
+            <label class="form-check-label">
+               <input type="checkbox" class="form-check-input" name="hasAdminRight" id="hasAdminRight" [(ngModel)]="model.hasAdminRight">
+               Admin
+             </label>
+        </div>
+
+        <div class="form-check">
+            <label class="form-check-label">
+               <input type="checkbox" class="form-check-input" name="hasFinanceRight" id="hasFinanceRight" [(ngModel)]="model.hasFinanceRight">
+               Finanzverwalter
+             </label>
+        </div>
+
+        <div class="form-group row">
+            <label for="password" class="col-sm-2 col-form-label">{{passwordCaption()}}</label>
+            <div class="col-sm-6">
+                <input class="form-control" name="password" id="password" [(ngModel)]="model.cleartextPassword" type="password" [required]="isNew()">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Speichern</button>
+        <a class="btn" [routerLink]="['/users/list']">Zurück</a>
+    </form>
+</div>

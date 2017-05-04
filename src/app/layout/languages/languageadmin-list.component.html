@@ -1,0 +1,38 @@
+<app-page-header [heading]="'Sprachen'" [icon]="'fa-language'"></app-page-header>
+
+<div class="card-block table-responsive">
+
+    <button class="btn btn-primary" [routerLink]="['/language/new']"><i class="fa fa-fw fa-plus-circle"></i>&nbsp;Neue Sprache</button>
+
+    <table class="mt-2 table">
+        <thead>
+            <tr>
+                <th>Identifizierung</th>
+                <th>Ordnung</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody *ngIf="o; else loading; let vs">
+            <tr *ngFor="let v of vs">
+                <td>{{v.identifier}}</td>
+                <td>{{v.viewOrder}}</td>
+                <td><button class="btn btn-outline-primary" [routerLink]="['/language/edit/', v.id]"><i class="fa fa-fw fa-pencil-square-o"></i>&nbsp;Bearbeiten</button></td>
+                <td>
+                  <button
+                    class="btn btn-outline-danger"
+                    mwlConfirmationPopover
+                    title="Löschen"
+                    message="Möchten sie diesen Eintrag wirklich löschen?"
+                    confirmText="Löschen"
+                    cancelText="Abbrechen"
+                    placement="top"
+                    (confirm)="delete(v.id, rowIndex)">
+                    <i class="fa fa-fw fa-remove"></i>&nbsp;Löschen
+                  </button>
+                </td>
+            </tr>
+          <ng-template #loading><div class="loader"></div></ng-template>
+        </tbody>
+    </table>
+</div>

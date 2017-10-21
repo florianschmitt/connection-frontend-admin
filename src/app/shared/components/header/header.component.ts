@@ -27,6 +27,10 @@ export class HeaderComponent implements OnInit {
         localStorage.removeItem('auth');
     }
 
+    getUserName() {
+        return localStorage.getItem('username')
+    }
+
     changeLang(language: string) {
         this.translate.use(language);
     }

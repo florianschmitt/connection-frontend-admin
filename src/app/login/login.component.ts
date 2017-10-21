@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PingService } from '../shared/services/ping.service';
+import { UserService } from '../shared/services/user.service';
 
 @Component({
     selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
     email: string;
     password: string;
 
-    constructor(public router: Router, public pingService: PingService) { }
+    constructor(public router: Router, public pingService: PingService, public userService: UserService) { }
 
     ngOnInit() { }
 
@@ -20,7 +21,14 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('auth', this.genAuth());
 
         this.pingService.ping()
-          .subscribe( x =>  this.router.navigateByUrl('/dashboard'));
+          .subscribe( x => this.authenticationSuccess());
+    }
+
+    authenticationSuccess() {
+        this.userService.getLoggedInName()
+            .subscribe( x => localStorage.setItem('username', x));
+
+        this.router.navigateByUrl('/dashboard')
     }
 
     genAuth() {

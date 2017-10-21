@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { LanguageService } from './shared/services/language.service';
 import { PingService } from './shared/services/ping.service';
+import { UserService } from './shared/services/user.service';
 import { RequestService } from './shared/services/request.service';
 import { BaseAdminService } from './shared/services/baseadmin.service';
 import { FormatService } from './shared/services/format.service';
@@ -38,7 +39,7 @@ export function HttpLoaderFactory(http: Http) {
             }
         })
     ],
-    providers: [AuthGuard, LanguageService, RequestService, PingService, BaseAdminService, FormatService, PaymentService,
+    providers: [AuthGuard, LanguageService, RequestService, PingService, BaseAdminService, FormatService, PaymentService, UserService,
       { provide: RequestOptions, useClass: CustomRequestOptions },
     ],
     bootstrap: [AppComponent]

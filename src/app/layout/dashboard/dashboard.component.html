@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-xl-3 col-lg-6 pt-2">
       <div *ngIf="info | async; else loading; let i">
-        <app-stat [bgClass]="'card-primary'" [icon]="'fa-clock-o'" [count]="i.openRequests" [label]="'offene Anfragen'" ></app-stat>
+        <app-stat [bgClass]="'bg-primary'" [icon]="'fa-clock-o'" [count]="i.openRequests" [label]="'offene Anfragen'" ></app-stat>
       </div>
       <template #loading>
         <div class="spinner height-100-px"><div class="double-bounce1"></div><div class="double-bounce2"></div></div>
@@ -11,7 +11,7 @@
     </div>
     <div class="col-xl-3 col-lg-6 pt-2">
       <div *ngIf="info | async; else loading; let i">
-        <app-stat [bgClass]="'card-success'" [icon]="'fa-comments'" [count]="i.acceptedRequests" [label]="'angenommene Anfragen'" ></app-stat>
+        <app-stat [bgClass]="'bg-success'" [icon]="'fa-comments'" [count]="i.acceptedRequests" [label]="'angenommene Anfragen'" ></app-stat>
       </div>
       <template #loading>
         <div class="spinner"><div class="double-bounce1"></div><div class="double-bounce2"></div></div>
@@ -19,7 +19,7 @@
     </div>
     <div class="col-xl-3 col-lg-6 pt-2">
       <div *ngIf="info | async; else loading; let i">
-        <app-stat [bgClass]="'card-warning'" [icon]="'fa-archive'" [count]="i.canceledRequests" [label]="'stornierte Anfragen'" ></app-stat>
+        <app-stat [bgClass]="'bg-warning'" [icon]="'fa-archive'" [count]="i.canceledRequests" [label]="'stornierte Anfragen'" ></app-stat>
       </div>
       <template #loading>
         <div class="spinner"><div class="double-bounce1"></div><div class="double-bounce2"></div></div>
@@ -27,7 +27,7 @@
     </div>
     <div class="col-xl-3 col-lg-6 pt-2">
       <div *ngIf="info | async; else loading; let i">
-        <app-stat [bgClass]="'card-info'" [icon]="'fa-history'" [count]="i.finishedRequests" [label]="'abgeschlossene Anfragen'" ></app-stat>
+        <app-stat [bgClass]="'bg-info'" [icon]="'fa-history'" [count]="i.finishedRequests" [label]="'abgeschlossene Anfragen'" ></app-stat>
       </div>
       <ng-template #loading>
         <div class="spinner"><div class="double-bounce1"></div><div class="double-bounce2"></div></div>

@@ -25,6 +25,8 @@ export class HeaderComponent implements OnInit {
     onLoggedout() {
         localStorage.removeItem('isLoggedin');
         localStorage.removeItem('auth');
+        localStorage.removeItem('hasAdminRight');
+        localStorage.removeItem('hasFinanceRight');
     }
 
     getUserName() {

@@ -10,6 +10,8 @@ export class Request {
   public phone: string;
   public state: string;
   public acceptedByVolunteer: string;
+  public requesterInstitution: string;
+  public requesterName: string;
   public createdAt: number[];
 
   constructor(

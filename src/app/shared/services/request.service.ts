@@ -13,6 +13,7 @@ export class RequestService extends BaseService {
   private urlGet = 'admin/request/get';
   private urlNotPayed = 'admin/request/notPayed';
   private urlGetAnswers = 'admin/request/getAnswers';
+  private urlDecline = 'declineRequest';
 
   constructor (private http: Http) {
     super();
@@ -40,5 +41,10 @@ export class RequestService extends BaseService {
     return this.http.get(this.urlGetAnswers + '/' + identifier)
                     .map(this.extractData)
                     .catch(this.handleError);
+  }
+
+  public decline(identifier: string): Observable<void> {
+      return this.http.get(this.urlDecline + '/' + identifier)
+                      .catch(this.handleError);
   }
 }

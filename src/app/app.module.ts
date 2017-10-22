@@ -16,6 +16,7 @@ import { RequestService } from './shared/services/request.service';
 import { BaseAdminService } from './shared/services/baseadmin.service';
 import { FormatService } from './shared/services/format.service';
 import { PaymentService } from './shared/services/payment.service';
+import { FeedbackService } from './shared/services/feedback.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
@@ -39,7 +40,7 @@ export function HttpLoaderFactory(http: Http) {
             }
         })
     ],
-    providers: [AuthGuard, LanguageService, RequestService, PingService, BaseAdminService, FormatService, PaymentService, UserService,
+    providers: [AuthGuard, LanguageService, RequestService, PingService, BaseAdminService, FormatService, PaymentService, UserService, FeedbackService,
       { provide: RequestOptions, useClass: CustomRequestOptions },
     ],
     bootstrap: [AppComponent]

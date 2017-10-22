@@ -12,8 +12,11 @@ import { LanguageService } from './../../shared/services/language.service';
 import { RequestService } from './../../shared/services/request.service';
 import { FormatService } from './../../shared/services/format.service';
 import { PaymentService } from '../../shared/services/payment.service';
+import { FeedbackService } from './../../shared/services/feedback.service';
+import { UserService } from './../../shared/services/user.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { PaymentListSingleComponent } from '../payment/payment-list-single.component';
+import { FeedbackComponent } from './feedback.component';
 
 @Component({
     selector: 'request-form',
@@ -30,7 +33,9 @@ export class RequestFormComponent implements OnInit {
       private paymentService: PaymentService,
       private router: Router,
       private route: ActivatedRoute,
-      private formatService: FormatService) { }
+      private formatService: FormatService,
+      private userService: UserService,
+      private feedbackService: FeedbackService) { }
 
     ngOnInit() {
       this.load().subscribe((request: Request) => this.model = request);
@@ -68,5 +73,11 @@ export class RequestFormComponent implements OnInit {
           this.paymentComment = "";
           this.paymentListSingleComponent.refresh();
         });
+    }
+
+    cancel() {
+        let requestId = this.model.requestIdentifier;
+        this.requestService.decline(requestId)
+            .subscribe(x => this.router.navigate(['dashboard']));
     }
 }

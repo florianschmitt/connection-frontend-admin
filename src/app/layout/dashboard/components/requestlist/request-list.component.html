@@ -3,27 +3,23 @@
         <thead>
             <tr>
                 <th>Nummer</th>
-                <th>Anfragezeitpunkt</th>
-                <th>Sprachen</th>
                 <th>Status</th>
+                <th>Anfragezeitpunkt</th>
+                <th>Zeitpunkt</th>
+                <th>Sprachen</th>
                 <th>übernommen von</th>
                 <th>angefragt von</th>
-                <th>Kontaktdaten</th>
-                <th>Zeitpunkt</th>
-                <th>Anlass</th>
             </tr>
         </thead>
         <tbody *ngIf="o | async; let vs">
             <tr *ngFor="let v of vs">
                 <td><a [routerLink]="['/request/edit/', v.requestIdentifier]">{{v.requestIdentifier}}</a></td>
-                <td>{{timestringCreate(v)}}</td>
-                <td>{{languages(v)}}</td>
                 <td>{{v.state}}</td>
-                <td>{{v.acceptedByVolunteer}}</td>
-                <td>TODO</td>
-                <td><a href="mailto:{{v.email}}">{{v.email}}</a> | {{v.phone}}</td>
+                <td>{{timestringCreate(v)}}</td>
                 <td>{{timestring(v)}}</td>
-                <td>{{address(v)}}<br>{{v.ocation}}</td>
+                <td>{{languages(v)}}</td>
+                <td>{{v.acceptedByVolunteer}}</td>
+                <td>{{v.requesterName}}</td>
             </tr>
           <ng-template #loading><div class="loader"></div></ng-template>
         </tbody>

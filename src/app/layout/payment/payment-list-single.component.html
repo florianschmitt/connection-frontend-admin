@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table" *ngIf="o | async; let vs">
     <thead>
         <tr>
             <th>Betrag</th>
@@ -7,9 +7,9 @@
             <th>Kommentar</th>
         </tr>
     </thead>
-    <tbody *ngIf="o | async; let vs">
+    <tbody>
         <tr *ngFor="let v of vs">
-            <td>{{v.paymentReceived}}</td>
+            <td>{{v.paymentReceived}} €</td>
             <td>{{v.paymentBookedBy}}</td>
             <td>{{timestring(v)}}</td>
             <td>{{v.comment}}</td>

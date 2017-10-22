@@ -1,0 +1,22 @@
+<div class="card" *ngIf="model; let vs">
+    <div class="card-header">Feedback</div>
+    <div class="card-block table-responsive table-sm px-2">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Bewertung</th>
+                    <th>Kommentar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr [class.table-danger]="vs.positive == false" [class.table-success]="vs.positive == true">
+                    <td>{{answerToString(vs)}}</td>
+                    <td>{{vs.comment}}</td>
+                </tr>
+                <ng-template #loading>
+                    <div class="loader"></div>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
+</div>

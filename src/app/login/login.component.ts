@@ -17,7 +17,10 @@ export class LoginComponent implements OnInit {
     ngOnInit() { }
 
     onLoggedin() {
-        localStorage.setItem('isLoggedin', 'true');
+        if (!this.email || !this.password) {
+            return;
+        }
+
         localStorage.setItem('auth', this.genAuth());
 
         this.pingService.ping()
@@ -25,8 +28,20 @@ export class LoginComponent implements OnInit {
     }
 
     authenticationSuccess() {
+        localStorage.setItem('isLoggedin', 'true');
+
         this.userService.getLoggedInName()
-            .subscribe( x => localStorage.setItem('username', x));
+            .subscribe(username => localStorage.setItem('username', username));
+
+        this.userService.getRoles()
+                .subscribe(roles => {
+                    if (roles.hasAdminRight) {
+                        localStorage.setItem('hasAdminRight', "true")
+                    }
+                    if (roles.hasFinanceRight) {
+                        localStorage.setItem('hasFinanceRight', "true")
+                    }
+                });
 
         this.router.navigateByUrl('/dashboard')
     }
@@ -35,5 +50,4 @@ export class LoginComponent implements OnInit {
       var result = "Basic " + btoa(this.email + ":" + this.password);
       return result;
     }
-
 }

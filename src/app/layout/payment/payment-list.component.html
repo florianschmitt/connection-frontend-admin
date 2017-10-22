@@ -15,7 +15,7 @@
         <tbody *ngIf="o | async; let vs">
             <tr *ngFor="let v of vs">
                 <td>{{v.requestId}}</td>
-                <td>{{v.paymentReceived}}</td>
+                <td>{{v.paymentReceived}} €</td>
                 <td>{{v.paymentBookedBy}}</td>
                 <td>{{timestring(v)}}</td>
                 <td>{{v.comment}}</td>

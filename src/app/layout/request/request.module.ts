@@ -7,6 +7,8 @@ import { RequestFormComponent } from './request-form.component';
 import { PageHeaderModule } from './../../shared';
 import { PaymentModule } from '../payment/payment.module';
 import { VoucherListSingleComponent } from './voucher-list-single.component';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { FeedbackComponent } from './feedback.component';
 
 @NgModule({
   imports: [
@@ -14,9 +16,12 @@ import { VoucherListSingleComponent } from './voucher-list-single.component';
     FormsModule,
     RequestRoutingModule,
     PageHeaderModule,
-    PaymentModule
+    PaymentModule,
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger'
+    })
   ],
-  declarations: [RequestFormComponent, VoucherListSingleComponent],
-  exports: [VoucherListSingleComponent], 
+  declarations: [RequestFormComponent, VoucherListSingleComponent, FeedbackComponent],
+  exports: [VoucherListSingleComponent],
 })
 export class RequestModule { }

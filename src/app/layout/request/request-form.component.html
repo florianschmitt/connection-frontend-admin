@@ -3,12 +3,24 @@
 
 <div class="container" *ngIf="model">
     <a class="btn btn-link" [routerLink]="['/dashboard']">Zurück</a>
+    <button
+        *ngIf="model.state == 'offen' || model.state == 'angenommen'"
+        class="btn btn-outline-danger"
+        mwlConfirmationPopover
+        title="Stornieren"
+        message="Soll diese Anfrage wirklich storniert werden?"
+        confirmText="Stornieren"
+        cancelText="Abbrechen"
+        placement="bottom"
+        (confirm)="cancel()">
+        <i class="fa fa-fw fa-remove"></i>&nbsp;Stornieren
+    </button>
 
     <div class="row">
         <div class="col-lg-6 pt-2">
             <div class="card">
                 <div class="card-header">Vorgang</div>
-                <div class="card-block m-2">
+                <div class="card-block p-2">
                     <div class="row">
                         <div class="col-5">Nummer</div>
                         <div class="col-7"><b>{{ model.requestIdentifier }}</b></div>
@@ -34,14 +46,6 @@
                         <div class="col-7">{{ model.ocation }}</div>
                     </div>
                     <div class="row">
-                        <div class="col-5">E-Mail</div>
-                        <div class="col-7"><a href="mailto:{{ model.email }}">{{ model.email }}</a></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-5">Telefonnummer</div>
-                        <div class="col-7">{{ model.phone }}</div>
-                    </div>
-                    <div class="row">
                         <div class="col-5">Straße</div>
                         <div class="col-7">{{ model.street }}</div>
                     </div>
@@ -54,6 +58,22 @@
                         <div class="col-7">{{ model.city }}</div>
                     </div>
                     <div class="row">
+                        <div class="col-5">E-Mail</div>
+                        <div class="col-7"><a href="mailto:{{ model.email }}">{{ model.email }}</a></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">Telefonnummer</div>
+                        <div class="col-7">{{ model.phone }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">Name</div>
+                        <div class="col-7">{{ model.requesterName }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">Institution</div>
+                        <div class="col-7">{{ model.requesterInstitution }}</div>
+                    </div>
+                    <div class="row">
                         <div class="col-5">Übernommen von</div>
                         <div class="col-7"><b>{{ model.acceptedByVolunteer }}</b></div>
                     </div>
@@ -64,34 +84,41 @@
         <div class="col-lg-6 pt-2">
           <div class="card">
             <div class="card-header">Vorgangsanfragen</div>
-            <div class="card-block table-responsive table-sm">
+            <div class="card-block table-responsive table-sm px-2">
               <voucher-list-single [requestId]="model.requestIdentifier"></voucher-list-single>
             </div>
           </div>
         </div>
 
         <div class="col-lg-6 pt-2">
+            <feedback [requestId]="model.requestIdentifier"></feedback>
+        </div>
+
+        <div class="col-lg-6 pt-2" *ngIf="userService.isFinanceUser()">
           <div class="mt-2 card">
             <div class="card-header">Aufwandsentschädigungen</div>
-            <div class="card-block table-responsive table-sm">
+            <div class="card-block table-responsive table-sm px-2">
               <payment-list-single [requestId]="model.requestIdentifier"></payment-list-single>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-6 pt-2">
+        <div class="col-lg-6 pt-2" *ngIf="userService.isFinanceUser()">
             <div class="mt-2 card">
                 <div class="card-header">Aufwandsentschädigung buchen</div>
-                <div class="card-block form-group m-2">
-                    <label for="paymentAmount" class="col-form-label">Betrag</label>
-                    <div class="col-xl-12">
-                        <input required type="number" ng-maxlength="1000" class="form-control" name="paymentAmount" id="paymentAmount" [(ngModel)]="paymentAmount">
+                <div class="card-block p-2">
+                    <div class="form-group">
+                        <label for="paymentAmount" class="col-form-label">Betrag</label>
+                        <div class="input-group mb-2 mb-sm-0">
+                          <div class="input-group-addon">€</div>
+                          <input required type="number" step="5" ng-maxlength="1000" class="form-control" name="paymentAmount" id="paymentAmount" [(ngModel)]="paymentAmount">
+                        </div>
                     </div>
 
+                <div class="form-group">
                     <label for="paymentComment" class="col-form-label">Kommentar</label>
-                    <div class="col-xl-12">
-                        <input class="form-control" name="paymentComment" id="paymentComment" [(ngModel)]="paymentComment">
-                    </div>
+                    <input class="form-control" name="paymentComment" id="paymentComment" [(ngModel)]="paymentComment">
+                </div>
 
                     <button [disabled]='canNotPlacePayment()' class="btn btn-success mt-1" (click)='placePayment()'>Buchen</button>
                 </div>

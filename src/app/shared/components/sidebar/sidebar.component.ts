@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from './../../services/user.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -8,6 +9,9 @@ import { Component } from '@angular/core';
 export class SidebarComponent {
     isActive = false;
     showMenu = '';
+
+constructor(private userService: UserService) { }
+
     eventCalled() {
         this.isActive = !this.isActive;
     }

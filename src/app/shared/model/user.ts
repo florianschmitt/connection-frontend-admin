@@ -3,7 +3,7 @@ export class User {
   public id: number;
   public firstname: string;
   public lastname: string;
-  public isActive: boolean;
+  public active: boolean;
   public hasAdminRight: boolean;
   public hasFinanceRight: boolean;
   public email: string;

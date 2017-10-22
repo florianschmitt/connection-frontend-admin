@@ -20,7 +20,7 @@
                 <td>{{v.firstname}}</td>
                 <td>{{v.lastname}}</td>
                 <td><a href="mailto:{{v.email}}">{{v.email}}</a></td>
-                <td>{{v.isActive == true ? "Aktiv" : "Inaktiv"}}</td>
+                <td>{{v.active == true ? "Aktiv" : "Inaktiv"}}</td>
                 <td><button class="btn btn-outline-primary" [routerLink]="['/users/edit/', v.id]"><i class="fa fa-fw fa-pencil-square-o"></i>&nbsp;Bearbeiten</button></td>
                 <td>
                   <button

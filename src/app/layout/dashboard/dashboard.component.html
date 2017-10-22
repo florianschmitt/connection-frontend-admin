@@ -1,38 +1,37 @@
 <h2 class="text-muted">Vorgänge <small>Übersicht</small></h2>
 
 <div class="row">
-    <div class="col-xl-3 col-lg-6 pt-2">
+    <div class="col-xl-3 col-sm-6 col-6 pt-2">
       <div *ngIf="info | async; else loading; let i">
-        <app-stat [bgClass]="'bg-primary'" [icon]="'fa-clock-o'" [count]="i.openRequests" [label]="'offene Anfragen'" ></app-stat>
-      </div>
-      <template #loading>
-        <div class="spinner height-100-px"><div class="double-bounce1"></div><div class="double-bounce2"></div></div>
-      </template>
-    </div>
-    <div class="col-xl-3 col-lg-6 pt-2">
-      <div *ngIf="info | async; else loading; let i">
-        <app-stat [bgClass]="'bg-success'" [icon]="'fa-comments'" [count]="i.acceptedRequests" [label]="'angenommene Anfragen'" ></app-stat>
-      </div>
-      <template #loading>
-        <div class="spinner"><div class="double-bounce1"></div><div class="double-bounce2"></div></div>
-      </template>
-    </div>
-    <div class="col-xl-3 col-lg-6 pt-2">
-      <div *ngIf="info | async; else loading; let i">
-        <app-stat [bgClass]="'bg-warning'" [icon]="'fa-archive'" [count]="i.canceledRequests" [label]="'stornierte Anfragen'" ></app-stat>
-      </div>
-      <template #loading>
-        <div class="spinner"><div class="double-bounce1"></div><div class="double-bounce2"></div></div>
-      </template>
-    </div>
-    <div class="col-xl-3 col-lg-6 pt-2">
-      <div *ngIf="info | async; else loading; let i">
-        <app-stat [bgClass]="'bg-info'" [icon]="'fa-history'" [count]="i.finishedRequests" [label]="'abgeschlossene Anfragen'" ></app-stat>
+        <app-stat [bgClass]="'bg-primary'" [icon]="'fa-clock-o'" [count]="i.openRequests" [label]="'offen'" ></app-stat>
       </div>
       <ng-template #loading>
         <div class="spinner"><div class="double-bounce1"></div><div class="double-bounce2"></div></div>
-      </ng-template>
+    </ng-template>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-6 pt-2">
+      <div *ngIf="info | async; else loading; let i">
+        <app-stat [bgClass]="'bg-success'" [icon]="'fa-comments'" [count]="i.acceptedRequests" [label]="'angenommen'" ></app-stat>
+      </div>
+      <ng-template #loading>
+        <div class="spinner"><div class="double-bounce1"></div><div class="double-bounce2"></div></div>
+    </ng-template>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-6 pt-2">
+      <div *ngIf="info | async; else loading; let i">
+        <app-stat [bgClass]="'bg-warning'" [icon]="'fa-archive'" [count]="i.canceledRequests" [label]="'storniert'" ></app-stat>
+      </div>
+      <ng-template #loading>
+        <div class="spinner"><div class="double-bounce1"></div><div class="double-bounce2"></div></div>
+    </ng-template>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-6 pt-2">
+      <div *ngIf="info | async; else loading; let i">
+        <app-stat [bgClass]="'bg-info'" [icon]="'fa-history'" [count]="i.finishedRequests" [label]="'abgeschlossen'" ></app-stat>
+      </div>
+      <ng-template #loading>
+        <div class="spinner"><div class="double-bounce1"></div><div class="double-bounce2"></div></div>
+        </ng-template>
     </div>
 </div>
-<hr />
 <request-list></request-list>

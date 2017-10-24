@@ -3,21 +3,13 @@
 
 <div class="container" *ngIf="model">
     <a class="btn btn-link" [routerLink]="['/dashboard']">Zurück</a>
-    <button
-        *ngIf="model.state == 'offen' || model.state == 'angenommen'"
-        class="btn btn-outline-danger"
-        mwlConfirmationPopover
-        title="Stornieren"
-        message="Soll diese Anfrage wirklich storniert werden?"
-        confirmText="Stornieren"
-        cancelText="Abbrechen"
-        placement="bottom"
-        (confirm)="cancel()">
+    <button *ngIf="model.state == 'offen' || model.state == 'angenommen'" class="btn btn-outline-danger" mwlConfirmationPopover title="Stornieren" message="Soll diese Anfrage wirklich storniert werden?" confirmText="Stornieren" cancelText="Abbrechen" placement="bottom"
+      (confirm)="cancel()">
         <i class="fa fa-fw fa-remove"></i>&nbsp;Stornieren
     </button>
 
-    <div class="row">
-        <div class="col-lg-6 pt-2">
+    <div class="row pt-2">
+        <div class="col">
             <div class="card">
                 <div class="card-header">Vorgang</div>
                 <div class="card-block p-2">
@@ -80,45 +72,53 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="col-lg-6 pt-2">
-          <div class="card">
-            <div class="card-header">Vorgangsanfragen</div>
-            <div class="card-block table-responsive table-sm px-2">
-              <voucher-list-single [requestId]="model.requestIdentifier"></voucher-list-single>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-6 pt-2">
+    <div class="row pt-4">
+        <div class="col">
             <feedback [requestId]="model.requestIdentifier"></feedback>
         </div>
+    </div>
 
-        <div class="col-lg-6 pt-2" *ngIf="userService.isFinanceUser()">
-          <div class="mt-2 card">
-            <div class="card-header">Aufwandsentschädigungen</div>
-            <div class="card-block table-responsive table-sm px-2">
-              <payment-list-single [requestId]="model.requestIdentifier"></payment-list-single>
+    <div class="row pt-4">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">Vorgangsanfragen</div>
+                <div class="card-block table-responsive table-sm px-2">
+                    <voucher-list-single [requestId]="model.requestIdentifier"></voucher-list-single>
+                </div>
             </div>
-          </div>
         </div>
+    </div>
 
-        <div class="col-lg-6 pt-2" *ngIf="userService.isFinanceUser()">
-            <div class="mt-2 card">
+    <div class="row pt-4" *ngIf="userService.isFinanceUser()">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">Aufwandsentschädigungen</div>
+                <div class="card-block table-responsive table-sm px-2">
+                    <payment-list-single [requestId]="model.requestIdentifier"></payment-list-single>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row pt-4" *ngIf="userService.isFinanceUser()">
+        <div class="col">
+            <div class="card">
                 <div class="card-header">Aufwandsentschädigung buchen</div>
                 <div class="card-block p-2">
                     <div class="form-group">
                         <label for="paymentAmount" class="col-form-label">Betrag</label>
                         <div class="input-group mb-2 mb-sm-0">
-                          <div class="input-group-addon">€</div>
-                          <input required type="number" step="5" ng-maxlength="1000" class="form-control" name="paymentAmount" id="paymentAmount" [(ngModel)]="paymentAmount">
+                            <div class="input-group-addon">€</div>
+                            <input required type="number" step="5" ng-maxlength="1000" class="form-control" name="paymentAmount" id="paymentAmount" [(ngModel)]="paymentAmount">
                         </div>
                     </div>
 
-                <div class="form-group">
-                    <label for="paymentComment" class="col-form-label">Kommentar</label>
-                    <input class="form-control" name="paymentComment" id="paymentComment" [(ngModel)]="paymentComment">
-                </div>
+                    <div class="form-group">
+                        <label for="paymentComment" class="col-form-label">Kommentar</label>
+                        <input class="form-control" name="paymentComment" id="paymentComment" [(ngModel)]="paymentComment">
+                    </div>
 
                     <button [disabled]='canNotPlacePayment()' class="btn btn-success mt-1" (click)='placePayment()'>Buchen</button>
                 </div>

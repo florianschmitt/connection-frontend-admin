@@ -9,8 +9,11 @@ import { UserService } from './../../services/user.service';
 export class SidebarComponent {
     isActive = false;
     showMenu = '';
+    userService: UserService;
 
-constructor(private userService: UserService) { }
+    constructor(private userService_: UserService) {
+        this.userService = userService_;
+    }
 
     eventCalled() {
         this.isActive = !this.isActive;

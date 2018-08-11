@@ -2,7 +2,8 @@ export class Request {
   public requestIdentifier: string;
   public languageIds: number[];
   public datetime: number[];
-  public ocation: string;
+  public occationEnum: string;
+  public occationString: string;
   public street: string;
   public postalCode: string;
   public city: string;

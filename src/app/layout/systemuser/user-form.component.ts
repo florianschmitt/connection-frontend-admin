@@ -6,9 +6,9 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
-import { User } from './../../shared/model/user';
-import { Language } from './../../shared/model/language';
-import { LanguageService } from './../../shared/services/language.service';
+import { User } from '../../shared/model/user';
+import { Language } from '../../shared/model/language';
+import { LanguageService } from '../../shared/services/language.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({

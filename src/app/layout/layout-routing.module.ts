@@ -12,6 +12,7 @@ const routes: Routes = [
             { path: 'language', loadChildren: './languages/languageadmin.module#LanguageAdminModule' },
             { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
             { path: 'payment', loadChildren: './payment/payment.module#PaymentModule' },
+            { path: 'templates', loadChildren: './templates/templates.module#TemplatesModule' },
             { path: 'charts', loadChildren: './charts/charts.module#ChartsModule' },
             { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },
             { path: 'forms', loadChildren: './form/form.module#FormModule' },

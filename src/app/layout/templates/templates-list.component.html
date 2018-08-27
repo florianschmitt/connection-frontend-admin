@@ -1,0 +1,24 @@
+<app-page-header [heading]="'Vorlagen'" [icon]="'fa-book'"></app-page-header>
+
+<div class="card-block table-responsive">
+
+    <!-- <button class="btn btn-primary" [routerLink]="['/templates/new']"><i class="fa fa-fw fa-plus-circle"></i>&nbsp;Neue(r) Freiwillige(r)</button> -->
+
+    <table class="mt-2 table">
+        <thead>
+            <tr>
+                <th>Identifierung</th>
+                <th>Beschreibung</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody *ngIf="templates; else loading; let vs">
+            <tr *ngFor="let v of vs">
+                <td>{{v.identifier}}</td>
+                <td>{{v.description}}</td>
+                <td><button class="btn btn-outline-primary" [routerLink]="['/templates/edit/', v.id]"><i class="fa fa-fw fa-pencil-square-o"></i>&nbsp;Bearbeiten</button></td>
+            </tr>
+          <ng-template #loading><div class="loader"></div></ng-template>
+        </tbody>
+    </table>
+</div>

@@ -19,65 +19,69 @@ import { PaymentListSingleComponent } from '../payment/payment-list-single.compo
 import { FeedbackComponent } from './feedback.component';
 
 @Component({
-    selector: 'request-form',
-    templateUrl: './request-form.component.html',
+  selector: 'request-form',
+  templateUrl: './request-form.component.html',
 })
 export class RequestFormComponent implements OnInit {
-    model: Request;
-    paymentAmount = 0;
-    paymentComment: string;
-    @ViewChild(PaymentListSingleComponent)
-    private paymentListSingleComponent: PaymentListSingleComponent;
+  model: Request;
+  paymentAmount = 0;
+  paymentComment: string;
+  @ViewChild(PaymentListSingleComponent)
+  private paymentListSingleComponent: PaymentListSingleComponent;
 
-    constructor(private requestService: RequestService,
-      private paymentService: PaymentService,
-      private router: Router,
-      private route: ActivatedRoute,
-      private formatService: FormatService,
-      private userService: UserService,
-      private feedbackService: FeedbackService) { }
+  constructor(private requestService: RequestService,
+    private paymentService: PaymentService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private formatService: FormatService,
+    private userService: UserService,
+    private feedbackService: FeedbackService) { }
 
-    ngOnInit() {
-      this.load().subscribe((request: Request) => this.model = request);
-    }
+  ngOnInit() {
+    this.load().subscribe((request: Request) => this.model = request);
+  }
 
-    private load(): Observable<Request> {
-      var fromBackend = this.route.params.switchMap((params: Params) => this.requestService.get(params['id']));
-      return fromBackend;
-    }
+  private load(): Observable<Request> {
+    var fromBackend = this.route.params.switchMap((params: Params) => this.requestService.get(params['id']));
+    return fromBackend;
+  }
 
-    languages(v: Request) {
-      return this.formatService.joinLanguages(v.languageIds);
-    }
+  languages(v: Request) {
+    return this.formatService.joinLanguages(v.languageIds);
+  }
 
-    timestringCreate(v: Request) {
-      return this.formatService.timestring(v.createdAt);
-    }
+  timestringCreate(v: Request) {
+    return this.formatService.timestring(v.createdAt);
+  }
 
-    timestring(v: Request) {
+  timestring(v: Request) {
+    if (v.datetime != null) {
       return this.formatService.timestring(v.datetime);
+    } else {
+      return v.dateDescription;
     }
+  }
 
-    canNotPlacePayment() {
-      return this.paymentAmount <= 0;
-    }
+  canNotPlacePayment() {
+    return this.paymentAmount <= 0;
+  }
 
-    placePayment() {
-      var p = new Payment();
-      p.requestId = this.model.requestIdentifier;
-      p.paymentReceived = this.paymentAmount;
-      p.comment = this.paymentComment;
-      this.paymentService.placePayment(p)
-        .subscribe(e => {
-          this.paymentAmount = 0;
-          this.paymentComment = "";
-          this.paymentListSingleComponent.refresh();
-        });
-    }
+  placePayment() {
+    var p = new Payment();
+    p.requestId = this.model.requestIdentifier;
+    p.paymentReceived = this.paymentAmount;
+    p.comment = this.paymentComment;
+    this.paymentService.placePayment(p)
+      .subscribe(e => {
+        this.paymentAmount = 0;
+        this.paymentComment = "";
+        this.paymentListSingleComponent.refresh();
+      });
+  }
 
-    cancel() {
-        let requestId = this.model.requestIdentifier;
-        this.requestService.decline(requestId)
-            .subscribe(x => this.router.navigate(['dashboard']));
-    }
+  cancel() {
+    let requestId = this.model.requestIdentifier;
+    this.requestService.decline(requestId)
+      .subscribe(x => this.router.navigate(['dashboard']));
+  }
 }

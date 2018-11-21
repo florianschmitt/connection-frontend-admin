@@ -7,14 +7,15 @@ import { Feedback } from '../model/feedback';
 
 @Injectable()
 export class FeedbackService extends BaseService {
-  private urlGet = 'admin/feedback/get';
+  private urlRequester = 'admin/feedback/requester';
+  private urlVolunteer = 'admin/feedback/volunteer';
 
   constructor (private http: Http) {
     super();
   }
 
   public get(id: string): Observable<Feedback> {
-    return this.http.get(this.urlGet + '/' + id)
+    return this.http.get(this.urlRequester + '/' + id)
                     .map(this.extractData)
                     .catch(this.handleError);
   }

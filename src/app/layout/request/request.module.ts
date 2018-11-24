@@ -9,6 +9,8 @@ import { PaymentModule } from '../payment/payment.module';
 import { VoucherListSingleComponent } from './voucher-list-single.component';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { FeedbackComponent } from './feedback.component';
+import { FeedbackVolunteerComponent } from './feedbackvolunteer.component';
+
 
 @NgModule({
   imports: [
@@ -21,7 +23,7 @@ import { FeedbackComponent } from './feedback.component';
       confirmButtonType: 'danger'
     })
   ],
-  declarations: [RequestFormComponent, VoucherListSingleComponent, FeedbackComponent],
+  declarations: [RequestFormComponent, VoucherListSingleComponent, FeedbackComponent, FeedbackVolunteerComponent],
   exports: [VoucherListSingleComponent],
 })
 export class RequestModule { }

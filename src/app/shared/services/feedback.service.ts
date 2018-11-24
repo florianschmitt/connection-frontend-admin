@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import { BaseService } from './base.service';
 import { Feedback } from '../model/feedback';
+import { FeedbackVolunteer } from '../model/feedbackvolunteer';
 
 @Injectable()
 export class FeedbackService extends BaseService {
@@ -16,6 +17,13 @@ export class FeedbackService extends BaseService {
 
   public get(id: string): Observable<Feedback> {
     return this.http.get(this.urlRequester + '/' + id)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
+
+  public getVolunteer(id: string): Observable<FeedbackVolunteer> {
+    return this.http.get(this.urlVolunteer + '/' + id)
                     .map(this.extractData)
                     .catch(this.handleError);
   }

@@ -1,0 +1,26 @@
+<div class="card" *ngIf="model; let vs">
+    <div class="card-header">Feedback Sprachbegleiter</div>
+    <div class="card-block table-responsive table-sm px-2">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Hat Stattgefunden</th>
+                    <th>War positiv</th>
+                    <th>Wurde abgesagt</th>
+                    <th>Kommentar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr [class.table-danger]="vs.positive == false" [class.table-success]="vs.positive == true">
+                    <td>{{booleanToString(vs.hasOccurred)}}</td>
+                    <td>{{booleanToString(vs.wasPositive)}}</td>
+                    <td>{{booleanToString(vs.wasCanceled)}}</td>
+                    <td>{{vs.comment}}</td>
+                </tr>
+                <ng-template #loading>
+                    <div class="loader"></div>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
+</div>
